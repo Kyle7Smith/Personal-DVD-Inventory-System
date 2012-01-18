@@ -1,0 +1,52 @@
+<%= form_for(@dvd) do |f| %>
+  <% if @dvd.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@dvd.errors.count, "error") %> prohibited this dvd from being saved:</h2>
+
+      <ul>
+      <% @dvd.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :genre %><br />
+    <select id="dvd_genre" name="dvd[genre]" >
+		<option value="action">Action</option>
+		<option value="comedy">Comedy</option>
+		<option value="family">Family</option>
+		<option value="horror">Horror</option>
+		<option value="mystery">Mystery</option>
+		<option value="romance">Romance</option>
+		<option value="sci">Sci-Fi</option>
+		<option value="other">Other</option>
+	</select>
+  </div>
+  <div class="field">
+    <%= f.label :release %><br />
+    <%= f.number_field :release %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :rating %><br />
+    <select id="dvd_rating" name="dvd[rating]">
+		<option value="1">Terrible</option>
+		<option value="2">Bearable</option>
+		<option value="3">Mediocre</option>
+		<option value="4">Good</option>
+		<option value="5">Awesome</option>
+	</select>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @dvd.title %>
+</p>
+
+<p>
+  <b>Genre:</b>
+  <%= @dvd.genre %>
+</p>
+
+<p>
+  <b>Release:</b>
+  <%= @dvd.release %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @dvd.description %>
+</p>
+
+<p>
+ <b>Rating:</b>
+<% 	rating = @dvd.rating 
+		path = ""
+		case rating
+			when 1
+				path = "/Images/oneStar.gif"
+			when 2
+				path = "/Images/twoStar.gif"
+			when 3
+				path = "/Images/threeStar.gif"
+			when 4
+				path = "/Images/fourStar.gif"
+			when 5
+				path = "/Images/fiveStar.gif"
+		end
+	%>
+
+	<img src=<%=path %> />
+</p>
+
+
+<%= link_to 'Edit', edit_dvd_path(@dvd) %> |
+<%= link_to 'Main Page', dvds_path %>

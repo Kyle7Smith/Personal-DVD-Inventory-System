@@ -1,0 +1,149 @@
+<div class="centered">
+	<img src="/Images/banner.gif" />
+</div>
+
+<% if ! params[:genre] %>
+
+<div class="centered">
+	<p>Click a link below to list the DVD titles you own in that genre, 
+		or click <%= link_to 'Add New DVD', new_dvd_path %> to add a new DVD.
+	</p>
+</div>
+
+<table id="content" class="centered">
+<tr>
+<td>
+	<div id="horror">
+		<% horrorCount = @horror.count %>
+		<%= link_to(:controller => "dvds", :genre => "horror") do %>
+		<h3>Horror</h3>
+		<img src="/Images/horrorDVD.gif" class="linked" /> <br />
+		<%= horrorCount %> Title(s)
+		<% end %>
+	</div>
+</td>
+<td	
+	<div id="action">
+		<% actionCount = @action.count %>
+		<%= link_to(:controller => "dvds", :genre => "action") do %>
+		<h3>Action</h3>
+		<img src="/Images/actionDVD.gif" class="linked" /> <br />
+		<%= actionCount %> Title(s)
+		<% end %>
+	</div>
+</td>
+
+<td>
+	<div id="family">
+		<% familyCount = @family.count %>
+		<%= link_to(:controller => "dvds", :genre => "family") do %>
+		<h3>Family</h3>
+		<img src="/Images/familyDVD.gif" class="linked" /> <br />
+		<%= familyCount %> Title(s)
+		<% end %>
+	</div>
+</td>
+
+<td>
+	<div id="comedy">
+		<% comedyCount = @comedy.count %>
+		<%= link_to(:controller => "dvds", :genre => "comedy") do %>
+		<h3>Comedy</h3>
+		<img src="/Images/comedyDVD.gif" class="linked" /> <br />
+		<%= comedyCount %> Title(s)
+		<% end %>
+	</div>
+</td>
+</tr>
+
+<tr>
+<td>
+	<div id="other">
+		<% otherCount = @other.count %>
+		<%= link_to(:controller => "dvds", :genre => "other") do %>
+		<h3>Other</h3>
+		<img src="/Images/otherDVD.gif" class="linked" /> <br />
+		<%= otherCount %> Title(s)
+		<% end %>
+	</div>
+</td>
+<td	
+	<div id="sci">
+		<% sciCount = @sci.count %>
+		<%= link_to(:controller => "dvds", :genre => "sci") do %>
+		<h3>Sci-Fi</h3>
+		<img src="/Images/sciDVD.gif" class="linked" /> <br />
+		<%= sciCount %> Title(s)
+		<% end %>
+	</div>
+</td>
+
+<td>
+	<div id="romance">
+		<% romanceCount = @romance.count %>
+		<%= link_to(:controller => "dvds", :genre => "romance") do %>
+		<h3>Romance</h3>
+		<img src="/Images/romanceDVD.gif" class="linked" /> <br />
+		<%= romanceCount %> Title(s)
+		<% end %>
+	</div>
+</td>
+
+<td>
+	<div id="mystery">
+		<% mysteryCount = @mystery.count %>
+		<%= link_to(:controller => "dvds", :genre => "mystery") do %>
+		<h3>Mystery</h3>
+		<img src="/Images/mysteryDVD.gif" class="linked" /> <br />
+		<%= mysteryCount %> Title(s)
+		<% end %>
+	</div>
+</td>
+</tr>
+</table>
+<% end %>
+
+<% if params[:genre] %>
+<div id="content" class="centered">
+	<p>Listing of <%= params[:genre] %> titles</p>
+	<%= link_to 'Add New DVD', new_dvd_path %>
+	<%= link_to 'Main Page', dvds_path %>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Release</th>
+    <th>Rating</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+<% @dvds.each do |dvd| %>
+  <tr>
+    <td><%= dvd.title %></td>
+    <td><%= dvd.release %></td>
+	<% 	rating = dvd.rating 
+		path = ""
+		case rating
+			when 1
+				path = "/Images/oneStar.gif"
+			when 2
+				path = "/Images/twoStar.gif"
+			when 3
+				path = "/Images/threeStar.gif"
+			when 4
+				path = "/Images/fourStar.gif"
+			when 5
+				path = "/Images/fiveStar.gif"
+		end
+	%>
+    <td><img src=<%=path %> /></td>
+    <td><%= link_to 'Show', dvd %></td>
+    <td><%= link_to 'Edit', edit_dvd_path(dvd) %></td>
+    <td nowrap="true"><%= link_to 'I don\'t own this DVD anymore.', dvd, confirm: 'Are you want to remove this DVD from your inventory?', method: :delete %></td>
+  </tr>
+<% end; end %>
+</table>
+</div>
+
+
+
